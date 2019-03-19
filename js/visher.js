@@ -40,12 +40,12 @@ visherMain.prototype = {
 	    	}
 	    	
 	    	if (resetVisher){    	
-		    	if (wiper.angle < -25 && game.stage.backgroundColor != 16711935){
+		    	if (wiper.angle < -25 && game.stage.backgroundColor != 255){
 					haSfx.play();
 					flashVisher(HU_COLOR);	
 	    		}
 		    	
-		    	else if (wiper.angle > 25 && game.stage.backgroundColor != 15793935){    		
+		    	else if (wiper.angle > 25 && game.stage.backgroundColor != 16776960){    		
     				huSfx.play();
 					flashVisher(HA_COLOR);
 				}	
