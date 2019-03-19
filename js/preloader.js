@@ -17,6 +17,9 @@ preloader.prototype = {
         game.load.image('tromboneImg', "assets/images/trombone.png");
         
         game.load.image('wiper', "assets/images/wiper.png");
+       
+        game.load.image('visherBlue', "assets/images/visherBlue.png");
+        game.load.image('visherYellow', "assets/images/visherYellow.png");
         
         game.load.image('plus', "assets/images/plus.png");
         game.load.image('minus', "assets/images/minus.png");
