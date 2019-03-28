@@ -28,7 +28,7 @@ function readTrombAccel(acceleration){
 	if (game.state.getCurrentState().key == "Trombone"){
 		
 		var beta = event.beta;  // -180,180 Y
-		accelY = Math.round((beta + 180) / 8.5) - 21;
+		accelY = Math.round((beta + 180) / 8.5) - 11;
 
 		angleText2.text = accelY;
 		
