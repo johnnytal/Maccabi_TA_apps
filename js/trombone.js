@@ -13,15 +13,19 @@ trombMain.prototype = {
     	trombImg = game.add.image(200, 100, 'tromboneImg');
     	
         angleText2 = game.add.text(250, 50, "Play it!", {font: '32px', fill: 'white'});
+        
+       	try{window.addEventListener('deviceorientation', readTrombAccel);}catch(e){}
 
-		try{navigator.accelerometer.watchAcceleration(readTrombAccel, onError, { frequency: 250 });} catch(e){}	
+		//try{navigator.accelerometer.watchAcceleration(readTrombAccel, onError, { frequency: 250 });} catch(e){}	
     }
 };
 
 function readTrombAccel(acceleration){
 	if (game.state.getCurrentState().key == "Trombone"){
 		
-		accelY = Math.abs(Math.round((acceleration.y * 4) / 4).toFixed(2)) * 4;
+		var beta = event.beta;  // -180,180 Y
+		accelY = Math.round((beta + 180) / 26);
+
 		angleText2.text = accelY;
 		
 		if (accelY < prev_reading){

@@ -47,12 +47,12 @@ function readAccel(acceleration){
 	
 	if (game.state.getCurrentState().key == 'Shaker'){
 		if (resetTouching){	 	
-	    	if (circle.y < 1){ // front
+	    	if (circle.body.blocked.up){ // front
 				front.play();
 				flash(FRONT_COLOR);	
 			}
 	    	
-	    	else if (circle.y > HEIGHT - circle.height - 1) { // back    		
+	    	else if (circle.body.blocked.down) { // back    		
 				back.play();
 				flash(BACK_COLOR);
 			}	
