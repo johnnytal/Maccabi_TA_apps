@@ -26,7 +26,7 @@ function readTrombAccel(acceleration){
 		accelY = Math.abs(roundIt(acceleration.y));
 		angleText2.text = accelY;
 		
-		if (accelY < (prev_reading + MIN_DIF)){
+		if (accelY + MIN_DIF < prev_reading){
 
 
 	        if (!trombSound.paused && !trombSound.isPlaying){
