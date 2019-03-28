@@ -1,5 +1,8 @@
 var trombMain = function(game){
 	prev_reading = 0;
+	
+	MIN_DIF = 0.25;
+	accelY = 0;
 };
 
 trombMain.prototype = {
@@ -19,9 +22,11 @@ trombMain.prototype = {
 
 function readTrombAccel(acceleration){
 	if (game.state.getCurrentState().key == "Trombone"){
-		angleText2.text = roundIt(acceleration.y);
 		
-		if (acceleration.y < prev_reading){
+		accelY = Math.abs(roundIt(acceleration.y));
+		angleText2.text = accelY;
+		
+		if (accelY < (prev_reading + MIN_DIF)){
 
 
 	        if (!trombSound.paused && !trombSound.isPlaying){
@@ -35,12 +40,14 @@ function readTrombAccel(acceleration){
 			trombImg.tint = 0x00ffff;
 		}
 		else{
-			trombSound.pause();
-			
+			setTimeout(function(){
+				trombSound.pause();
+			}, 300);
+
 			game.stage.backgroundColor = '#0f5420';
 			trombImg.tint = 0xffffff;
 		}
 		
-		prev_reading = acceleration.y;
+		prev_reading = accelY;
 	}
 }
