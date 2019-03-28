@@ -29,15 +29,14 @@ function readTrombAccel(acceleration){
 		angleText2.text = accelY;
 		
 		if (accelY < prev_reading){
-		        if (trombSound.paused){
-		           trombSound.resume();    
-		        }
-		        else if (!trombSound.isPlaying && !trombSound.paused){
-		            trombSound.play();
-		        }
+	        if (trombSound.paused){
+	           trombSound.resume();    
+	        }
+	        else if (!trombSound.isPlaying && !trombSound.paused){
+	            trombSound.play();
+	        }
 	
-				game.stage.backgroundColor = '#0245f0';
-			}
+			game.stage.backgroundColor = '#0245f0';
 			trombImg.tint = 0x00ffff;
 		}
 		else{
