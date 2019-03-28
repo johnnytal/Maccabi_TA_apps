@@ -1,7 +1,5 @@
 var trombMain = function(game){
 	prev_reading = 0;
-	
-	MIN_DIF = 0.25;
 	accelY = 0;
 };
 
@@ -16,36 +14,36 @@ trombMain.prototype = {
     	
         angleText2 = game.add.text(250, 50, "Play it!", {font: '32px', fill: 'white'});
 
-		try{navigator.accelerometer.watchAcceleration(readTrombAccel, onError, { frequency: 1 });} catch(e){}	
+		try{navigator.accelerometer.watchAcceleration(readTrombAccel, onError, { frequency: 250 });} catch(e){}	
     }
 };
 
 function readTrombAccel(acceleration){
 	if (game.state.getCurrentState().key == "Trombone"){
 		
-		accelY = Math.abs(roundIt(acceleration.y));
+		accelY = Math.abs(Math.round((acceleration.y * 4) / 4).toFixed(2)) * 4;
 		angleText2.text = accelY;
 		
-		if (accelY + MIN_DIF < prev_reading){
-
-
-	        if (!trombSound.paused && !trombSound.isPlaying){
-	            trombSound.play();    
-	        }
-	        else{
-	            trombSound.resume();
-	        }
-
-			game.stage.backgroundColor = '#0245f0';
-			trombImg.tint = 0x00ffff;
+		if (accelY < prev_reading){
+			if (!trombSound.isPlaying){
+		        if (!trombSound.paused){
+		            trombSound.play();    
+		        }
+		        else{
+		            trombSound.resume();
+		        }
+	
+				game.stage.backgroundColor = '#0245f0';
+				trombImg.tint = 0x00ffff;
+			}
 		}
 		else{
-			setTimeout(function(){
+			if (trombSound.isPlaying){
 				trombSound.pause();
-			}, 300);
-
-			game.stage.backgroundColor = '#0f5420';
-			trombImg.tint = 0xffffff;
+				
+				game.stage.backgroundColor = '#0f5420';
+				trombImg.tint = 0xffffff;
+			}
 		}
 		
 		prev_reading = accelY;
