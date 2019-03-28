@@ -99,7 +99,7 @@ function roundIt(_num){
 function initPlugIns(){
     try{window.plugins.insomnia.keepAwake();} catch(e){} // keep awake
     try{StatusBar.hide();} catch(e){} // hide status bar
-    try{window.androidVolume.setMusic(10, false);} catch(e){} // max media volume
+    try{window.androidVolume.setMusic(30, false);} catch(e){} // max media volume
 }
 
 function UIbuttons(){	    	

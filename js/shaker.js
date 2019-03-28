@@ -8,8 +8,8 @@ var shakerMain = function(game){
 	distanceFactor = 0;
 	resetTouching = true;
 	
-	INIT_SIZE = 0.66;
-	INIT_SENS = 1.5;
+	INIT_SIZE = 0.65;
+	INIT_SENS = 8;
 };
 
 shakerMain.prototype = {
@@ -44,20 +44,20 @@ shakerMain.prototype = {
 function readAccel(acceleration){	
     circle.y = MIDDLE + acceleration.x * (INIT_SENS + sensFactor);
     
-	if (!resetTouching && Math.abs(circle.y - MIDDLE) < 25){
+	if (!resetTouching && Math.abs(circle.y - MIDDLE) < 20){
 		resetTouching = true;
 	}
 	
 	if (game.state.getCurrentState().key == 'Shaker'){
 		if (resetTouching && !front.isPlaying && !back.isPlaying){	 	
 	    	if (circle.body.blocked.up){ // front
-	    		front.volume = Math.abs(acceleration.x / 10);
+	    		front.volume = Math.abs(acceleration.x / 14);
 				front.play();
 				flash(FRONT_COLOR);	
 			}
 	    	
 	    	else if (circle.body.blocked.down) { // back 
-	    		back.volume = Math.abs(acceleration.x / 10);   		
+	    		back.volume = Math.abs(acceleration.x / 14);   		
 				back.play();
 				flash(BACK_COLOR);
 			}	
@@ -72,10 +72,10 @@ function flash(_color){
 	
 	if (_color == FRONT_COLOR){
 		window.plugins.flashlight.switchOn();
-		setTimeout(function(){navigator.vibrate(25);}, 20);	
+		navigator.vibrate(20);;	
 	}
 	else{
-		setTimeout(function(){navigator.vibrate(12);}, 20);	
+		navigator.vibrate(20);	
 	}
 
 	setTimeout(function(){
