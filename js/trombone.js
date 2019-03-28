@@ -28,12 +28,14 @@ function readTrombAccel(acceleration){
 	if (game.state.getCurrentState().key == "Trombone"){
 		
 		var beta = event.beta;  // -180,180 Y
-		accelY = Math.round((beta + 180) / 17);
+		accelY = Math.round((beta + 180) / 8.5) - 21;
 
 		angleText2.text = accelY;
 		
 		if (prev_reading != accelY){
-			notesToPlay[accelY].play();
+			if (accelY < 21){
+				notesToPlay[accelY].play();
+			}
 		}
 		
 		/*if (accelY < prev_reading){
