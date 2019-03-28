@@ -89,11 +89,14 @@ function choose(_what){
 	button.inputEnabled = false;
 
 	setTimeout(function(){
-		game.add.tween(_what.scale).to({ x: 0.75, y: 0.75}, 2750, "Linear", true);
+        _what.x = WIDTH / 2 - _what.width / 2;
+        _what.y = HEIGHT / 2 - _what.height / 2;
+        
+		game.add.tween(_what.scale).to({ x: 2.5, y: 2.5}, 2000, "Linear", true);
 		
 		for(n=0; n<elements.length; n++){
 			if (elements[n] != _what){
-				FOtween = game.add.tween(elements[n]).to( { alpha: 0 }, 1750, "Linear", true);
+				FOtween = game.add.tween(elements[n]).to( { alpha: 0 }, 1000, "Linear", true);
 			}
 		}
 		
