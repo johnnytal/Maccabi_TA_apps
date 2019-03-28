@@ -16,6 +16,9 @@ trombMain.prototype = {
         angleText2 = game.add.text(250, 50, "Play it!", {font: '32px', fill: 'white'});
         
        	try{window.addEventListener('deviceorientation', readTrombAccel);}catch(e){}
+       	
+   		fxTromb = game.add.audioSprite('trombone');
+    	fxTromb.allowMultiple = true;
 
 		//try{navigator.accelerometer.watchAcceleration(readTrombAccel, onError, { frequency: 250 });} catch(e){}	
     }
@@ -25,11 +28,13 @@ function readTrombAccel(acceleration){
 	if (game.state.getCurrentState().key == "Trombone"){
 		
 		var beta = event.beta;  // -180,180 Y
-		accelY = Math.round((beta + 180) / 3);
+		accelY = Math.round((beta + 180) / 15);
 
 		angleText2.text = accelY;
 		
-		if (accelY < prev_reading){
+		fxTromb.play(accelY);
+		
+		/*if (accelY < prev_reading){
 			try{
 				clearTimeout(muteTimer);
 				muteTimer = null;
@@ -57,6 +62,6 @@ function readTrombAccel(acceleration){
 			}
 		}
 		
-		prev_reading = accelY;
+		prev_reading = accelY;*/
 	}
 }

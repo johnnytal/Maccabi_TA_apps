@@ -38,7 +38,9 @@ preloader.prototype = {
         game.load.audio("front", "assets/audio/front.mp3");
         game.load.audio("back", "assets/audio/back.mp3");
         
-        game.load.audio("trombone", "assets/audio/trombone.mp3");
+        //game.load.audio("trombone", "assets/audio/trombone.mp3");
+        
+        game.load.audiosprite('trombone', "assets/audio/trombInstru.mp3", null, trombJson);
     },
     
     create: function(){		        

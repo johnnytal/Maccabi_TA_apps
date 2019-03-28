@@ -72,10 +72,10 @@ function flash(_color){
 	
 	if (_color == FRONT_COLOR){
 		window.plugins.flashlight.switchOn();
-		navigator.vibrate(20);;	
+		navigator.vibrate(22);;	
 	}
 	else{
-		navigator.vibrate(20);	
+		navigator.vibrate(22);	
 	}
 
 	setTimeout(function(){
