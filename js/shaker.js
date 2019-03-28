@@ -8,8 +8,8 @@ var shakerMain = function(game){
 	distanceFactor = 0;
 	resetTouching = true;
 	
-	INIT_SIZE = 0.65;
-	INIT_SENS = 8;
+	INIT_SIZE = 0.67;
+	INIT_SENS = 7.8;
 };
 
 shakerMain.prototype = {
@@ -44,20 +44,20 @@ shakerMain.prototype = {
 function readAccel(acceleration){	
     circle.y = MIDDLE + acceleration.x * (INIT_SENS + sensFactor);
     
-	if (!resetTouching && Math.abs(circle.y - MIDDLE) < 20){
+	if (!resetTouching && Math.abs(circle.y - MIDDLE) < 22){
 		resetTouching = true;
 	}
 	
 	if (game.state.getCurrentState().key == 'Shaker'){
 		if (resetTouching && !front.isPlaying && !back.isPlaying){	 	
 	    	if (circle.body.blocked.up){ // front
-	    		front.volume = Math.abs(acceleration.x / 14);
+	    		front.volume = Math.abs(acceleration.x / 15);
 				front.play();
 				flash(FRONT_COLOR);	
 			}
 	    	
 	    	else if (circle.body.blocked.down) { // back 
-	    		back.volume = Math.abs(acceleration.x / 14);   		
+	    		back.volume = Math.abs(acceleration.x / 15);   		
 				back.play();
 				flash(BACK_COLOR);
 			}	
