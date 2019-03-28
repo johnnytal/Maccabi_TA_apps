@@ -7,6 +7,9 @@ var shakerMain = function(game){
 	sensFactor = 0;
 	distanceFactor = 0;
 	resetTouching = true;
+	
+	INIT_SIZE = 0.66;
+	INIT_SENS = 1.5;
 };
 
 shakerMain.prototype = {
@@ -24,7 +27,7 @@ shakerMain.prototype = {
 		circles.physicsBodyType = Phaser.Physics.ARCADE;
 		
 		circle = circles.create(0, 0, 'green');
-		circle.scale.set(0.82, 0.82);
+		circle.scale.set(INIT_SIZE, INIT_SIZE);
 
         circle.x = WIDTH / 2 - circle.width / 2;
         MIDDLE = HEIGHT / 2 - circle.height / 2;
@@ -39,20 +42,22 @@ shakerMain.prototype = {
 };
 
 function readAccel(acceleration){	
-    circle.y = MIDDLE + acceleration.x * (7.55 + sensFactor);
+    circle.y = MIDDLE + acceleration.x * (INIT_SENS + sensFactor);
     
-	if (!resetTouching && circle.y > 30 && circle.y < (HEIGHT - circle.height - 30)){
+	if (!resetTouching && Math.abs(circle.y - MIDDLE) < 25){
 		resetTouching = true;
 	}
 	
 	if (game.state.getCurrentState().key == 'Shaker'){
-		if (resetTouching){	 	
+		if (resetTouching && !front.isPlaying && !back.isPlaying){	 	
 	    	if (circle.body.blocked.up){ // front
+	    		front.volume = Math.abs(acceleration.x / 10);
 				front.play();
 				flash(FRONT_COLOR);	
 			}
 	    	
-	    	else if (circle.body.blocked.down) { // back    		
+	    	else if (circle.body.blocked.down) { // back 
+	    		back.volume = Math.abs(acceleration.x / 10);   		
 				back.play();
 				flash(BACK_COLOR);
 			}	
@@ -115,7 +120,7 @@ function XtraUIbuttons(){
     	distanceFactor += 0.01;
     	distanceText.text = "Size\nfactor: " + roundIt(distanceFactor);
     	plusD.tint = 0xf04030;
-    	circle.scale.set(0.5 + distanceFactor);
+    	circle.scale.set(INIT_SIZE + distanceFactor);
     	setTimeout(function(){plusD.tint = 0xffffff;},100);
     }, this);
     
@@ -127,7 +132,7 @@ function XtraUIbuttons(){
     	distanceFactor -= 0.01;
     	distanceText.text = "Size\nfactor: " + roundIt(distanceFactor);
     	minusD.tint = 0xf04030;
-    	circle.scale.set(0.5 + distanceFactor);
+    	circle.scale.set(INIT_SIZE + distanceFactor);
     	setTimeout(function(){minusD.tint = 0xffffff;},100);
     }, this);
 	
