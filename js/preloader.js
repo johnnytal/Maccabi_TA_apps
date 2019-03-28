@@ -40,7 +40,30 @@ preloader.prototype = {
         
         //game.load.audio("trombone", "assets/audio/trombone.mp3");
         
-        game.load.audiosprite('trombone', "assets/audio/trombInstru.mp3", null, trombJson);
+        game.load.audio("HO_stac_mf2_A2", "assets/HO_stac_mf2/HO_stac_mf2_A2.mp3");
+        game.load.audio("HO_stac_mf2_A3", "assets/HO_stac_mf2/HO_stac_mf2_A3.mp3");
+        game.load.audio("HO_stac_mf2_A4", "assets/HO_stac_mf2/HO_stac_mf2_A4.mp3");
+        game.load.audio("HO_stac_mf2_B1", "assets/HO_stac_mf2/HO_stac_mf2_B1.mp3");
+        game.load.audio("HO_stac_mf2_B2", "assets/HO_stac_mf2/HO_stac_mf2_B2.mp3");
+        game.load.audio("HO_stac_mf2_B3", "assets/HO_stac_mf2/HO_stac_mf2_B3.mp3");
+        game.load.audio("HO_stac_mf2_B4", "assets/HO_stac_mf2/HO_stac_mf2_B4.mp3");
+        game.load.audio("HO_stac_mf2_C_2", "assets/HO_stac_mf2/HO_stac_mf2_C_2.mp3");
+        game.load.audio("HO_stac_mf2_C_3", "assets/HO_stac_mf2/HO_stac_mf2_C_3.mp3");
+        game.load.audio("HO_stac_mf2_C_4", "assets/HO_stac_mf2/HO_stac_mf2_C_4.mp3");
+        game.load.audio("HO_stac_mf2_C2", "assets/HO_stac_mf2/HO_stac_mf2_C2.mp3");
+        game.load.audio("HO_stac_mf2_D_2", "assets/HO_stac_mf2/HO_stac_mf2_D_2.mp3");
+        game.load.audio("HO_stac_mf2_D_3", "assets/HO_stac_mf2/HO_stac_mf2_D_3.mp3");
+        game.load.audio("HO_stac_mf2_D_4", "assets/HO_stac_mf2/HO_stac_mf2_D_4.mp3");
+        game.load.audio("HO_stac_mf2_D2", "assets/HO_stac_mf2/HO_stac_mf2_D2.mp3");
+        game.load.audio("HO_stac_mf2_E2", "assets/HO_stac_mf2/HO_stac_mf2_E2.mp3");
+        game.load.audio("HO_stac_mf2_F_2", "assets/HO_stac_mf2/HO_stac_mf2_F_2.mp3");
+        game.load.audio("HO_stac_mf2_F2", "assets/HO_stac_mf2/HO_stac_mf2_F2.mp3");
+        game.load.audio("HO_stac_mf2_F3", "assets/HO_stac_mf2/HO_stac_mf2_F3.mp3");
+        game.load.audio("HO_stac_mf2_F4", "assets/HO_stac_mf2/HO_stac_mf2_F4.mp3");
+        game.load.audio("HO_stac_mf2_G_2", "assets/HO_stac_mf2/HO_stac_mf2_G_2.mp3");
+        game.load.audio("HO_stac_mf2_G2", "assets/HO_stac_mf2/HO_stac_mf2_G2.mp3");
+        game.load.audio("HO_stac_mf2_G3", "assets/HO_stac_mf2/HO_stac_mf2_G3.mp3");
+        game.load.audio("HO_stac_mf2_G4", "assets/HO_stac_mf2/HO_stac_mf2_G4.mp3");
     },
     
     create: function(){		        
@@ -51,3 +74,4 @@ preloader.prototype = {
         this.game.state.start("Buttons"); 
     }
 };
+3

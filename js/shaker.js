@@ -49,15 +49,15 @@ function readAccel(acceleration){
 	}
 	
 	if (game.state.getCurrentState().key == 'Shaker'){
-		if (resetTouching && !front.isPlaying && !back.isPlaying){	 	
+		if (resetTouching){	 	
 	    	if (circle.body.blocked.up){ // front
-	    		front.volume = Math.abs(acceleration.x / 15);
+	    		front.volume = Math.abs(acceleration.x / 10);
 				front.play();
 				flash(FRONT_COLOR);	
 			}
 	    	
 	    	else if (circle.body.blocked.down) { // back 
-	    		back.volume = Math.abs(acceleration.x / 15);   		
+	    		back.volume = Math.abs(acceleration.x / 10);   		
 				back.play();
 				flash(BACK_COLOR);
 			}	
