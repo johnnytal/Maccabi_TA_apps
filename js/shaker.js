@@ -45,20 +45,20 @@ function readAccel(acceleration){
     //circle.y = MIDDLE + acceleration.x * (INIT_SENS + sensFactor);
     circle.body.velocity.y = acceleration.x * (INIT_SENS + sensFactor);
     
-	if (!resetTouching && Math.abs(circle.y - MIDDLE) < 25){
+	if (!resetTouching && Math.abs(circle.y - MIDDLE) < 15){
 		resetTouching = true;
 	}
 	
 	if (game.state.getCurrentState().key == 'Shaker'){
 		if (resetTouching){	 	
 	    	if (circle.body.blocked.up){ // front
-	    		front.volume = Math.abs(acceleration.x / 10);
+	    		//front.volume = Math.abs(acceleration.x / 10);
 				front.play();
 				flash(FRONT_COLOR);	
 			}
 	    	
 	    	else if (circle.body.blocked.down) { // back 
-	    		back.volume = Math.abs(acceleration.x / 10);   		
+	    		//back.volume = Math.abs(acceleration.x / 10);   		
 				back.play();
 				flash(BACK_COLOR);
 			}	

@@ -37,7 +37,11 @@ function readTrombAccel(acceleration){
 				notesToPlay[accelY].play();
 				
 				if (accelY > 0){
-					try{ notesToPlay[prev_reading].fadeOut(100); }catch(e){}
+					try{ notesToPlay[prev_reading].fadeOut(100);
+						 notesToPlay[prev_reading].onFadeComplete(function(){
+						 	notesToPlay[prev_reading].volume = 1;
+						 });
+					}catch(e){}
 				}
 			}
 		}
