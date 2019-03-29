@@ -48,7 +48,7 @@ shakerMain.prototype = {
 function readAccel(acceleration){	
     //circle.y = MIDDLE + acceleration.x * (INIT_SENS + sensFactor);
 
-    circle.y = roundIt(MIDDLE + 22 + sensFactor + (acceleration.gamma * -3.75));
+    circle.y = roundIt(MIDDLE + 22 + sensFactor + (acceleration.gamma * (-3.75 + distanceFactor)));
     
     debugText.text = roundIt(acceleration.gamma) + '\n' + circle.y;
    
@@ -61,7 +61,7 @@ function readAccel(acceleration){
    
    // volume = Math.abs(acceleration.x / 10);
     
-	if (!resetTouching && Math.abs(circle.y - MIDDLE) < 20){
+	if (circle.y > 2 && circle.y < HEIGHT - 2){
 		resetTouching = true;
 	}
 	
@@ -131,10 +131,10 @@ function XtraUIbuttons(){
     plusD.alpha = 0.85;
     plusD.inputEnabled = true;
     plusD.events.onInputDown.add(function(){
-    	distanceFactor += 0.01;
+    	distanceFactor += 0.05;
     	distanceText.text = "Size\nfactor: " + roundIt(distanceFactor);
     	plusD.tint = 0xf04030;
-    	circle.scale.set(INIT_SIZE + distanceFactor);
+    	//circle.scale.set(INIT_SIZE + distanceFactor);
     	setTimeout(function(){plusD.tint = 0xffffff;},100);
     }, this);
     
@@ -143,10 +143,10 @@ function XtraUIbuttons(){
     minusD.alpha = 0.85;
     minusD.inputEnabled = true;
     minusD.events.onInputDown.add(function(){
-    	distanceFactor -= 0.01;
+    	distanceFactor -= 0.05;
     	distanceText.text = "Size\nfactor: " + roundIt(distanceFactor);
     	minusD.tint = 0xf04030;
-    	circle.scale.set(INIT_SIZE + distanceFactor);
+    	//circle.scale.set(INIT_SIZE + distanceFactor);
     	setTimeout(function(){minusD.tint = 0xffffff;},100);
     }, this);
 	
