@@ -48,7 +48,7 @@ shakerMain.prototype = {
 function readAccel(acceleration){	
     //circle.y = MIDDLE + acceleration.x * (INIT_SENS + sensFactor);
 
-    circle.y = MIDDLE + (Math.round(acceleration.gamma) * -2);
+    circle.y = MIDDLE + (Math.round(acceleration.gamma) * -3) - 20;
     
     debugText.text = roundIt(acceleration.gamma) + '\n' + circle.y;
    
@@ -61,7 +61,7 @@ function readAccel(acceleration){
    
    // volume = Math.abs(acceleration.x / 10);
     
-	if (!resetTouching && Math.abs(circle.y - MIDDLE) < 40){
+	if (!resetTouching && Math.abs(circle.y - MIDDLE) < 20){
 		resetTouching = true;
 	}
 	
