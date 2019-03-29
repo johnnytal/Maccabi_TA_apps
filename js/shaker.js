@@ -9,7 +9,7 @@ var shakerMain = function(game){
 	resetTouching = true;
 	
 	INIT_SIZE = 0.7;
-	INIT_SENS = 60;
+	INIT_SENS = 70;
 };
 
 shakerMain.prototype = {
@@ -45,7 +45,7 @@ function readAccel(acceleration){
     //circle.y = MIDDLE + acceleration.x * (INIT_SENS + sensFactor);
     circle.body.velocity.y = acceleration.x * (INIT_SENS + sensFactor);
     
-	if (!resetTouching && Math.abs(circle.y - MIDDLE) < 15){
+	if (!resetTouching && Math.abs(circle.y - MIDDLE) < 30){
 		resetTouching = true;
 	}
 	

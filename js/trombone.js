@@ -34,14 +34,10 @@ function readTrombAccel(acceleration){
 		
 		if (prev_reading != accelY){
 			if (accelY < 8){
-				notesToPlay[accelY].play();
+				notesToPlay[accelY].fadeIn(25);
 				
 				if (accelY > 0){
-					try{ notesToPlay[prev_reading].fadeOut(100);
-						 notesToPlay[prev_reading].onFadeComplete(function(){
-						 	notesToPlay[prev_reading].volume = 1;
-						 });
-					}catch(e){}
+					try{ notesToPlay[prev_reading].fadeOut(25); }catch(e){}
 				}
 			}
 		}
