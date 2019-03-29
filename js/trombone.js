@@ -4,7 +4,7 @@ var trombMain = function(game){
 	muteTimer = null;
 	notesToPlay = [];
 	
-	INIT_FADE = 25;
+	INIT_FADE = 60;
 	fadeFactor = 0;
 };
 
