@@ -3,13 +3,13 @@ var shakerMain = function(game){
 	BACK_COLOR = '#656d7c';
 	
 	MIDDLE = null;
+	resetTouching = true;
 
 	sensFactor = 0;
 	distanceFactor = 0;
-	resetTouching = true;
-	
-	INIT_SIZE = 0.7;
-	INIT_SENS = 85;
+
+	INIT_SIZE = 0.82;
+	INIT_SENS = 7.55;
 };
 
 shakerMain.prototype = {
@@ -36,34 +36,45 @@ shakerMain.prototype = {
         circle.body.collideWorldBounds = true;
         
 		XtraUIbuttons();
+		
+	    debugText = game.add.text(100, 30, "debug", {font: '22px', fill: 'white'});
+    
 
-        try{navigator.accelerometer.watchAcceleration(readAccel, onError, { frequency: 1});} catch(e){}
+        //try{navigator.accelerometer.watchAcceleration(readAccel, onError, { frequency: 1});} catch(e){}
+        try{navigator.rotationvector.watchRotationVector(readAccel,onError, { frequency: 1});} catch(e){}
     }
 };
 
 function readAccel(acceleration){	
     //circle.y = MIDDLE + acceleration.x * (INIT_SENS + sensFactor);
-    if (Math.abs(acceleration.x) > 1.8){
+    
+    debugText.text = 'alpha: ' + acceleration.alpha + '\n' +
+          'beta: ' + acceleration.beta + '\n' +
+          'gamma: ' + acceleration.gamma;
+    
+    circle.y = MIDDLE + acceleration.beta * (INIT_SENS + sensFactor);
+   
+   /* if (Math.abs(acceleration.x) > 1.8){
     	circle.body.velocity.y = acceleration.x * (INIT_SENS + sensFactor);
     }
     else{
     	circle.body.velocity.y = 0;
-    }
+    }*/
+   
+   // volume = Math.abs(acceleration.x / 10);
     
-	if (!resetTouching && Math.abs(circle.y - MIDDLE) < 30){
+	if (!resetTouching && Math.abs(circle.y - MIDDLE) < 40){
 		resetTouching = true;
 	}
 	
 	if (game.state.getCurrentState().key == 'Shaker'){
 		if (resetTouching){	 	
 	    	if (circle.body.blocked.up){ // front
-	    		//front.volume = Math.abs(acceleration.x / 10);
 				front.play();
 				flash(FRONT_COLOR);	
 			}
 	    	
-	    	else if (circle.body.blocked.down) { // back 
-	    		//back.volume = Math.abs(acceleration.x / 10);   		
+	    	else if (circle.body.blocked.down) { // back  		
 				back.play();
 				flash(BACK_COLOR);
 			}	
