@@ -50,7 +50,7 @@ shakerMain.prototype = {
 function readAccel(acceleration){	
     //circle.y = MIDDLE + acceleration.x * (INIT_SENS + sensFactor);
     
-    noteCircle = Math.round((gamma + 90) / 3.6) - 15;
+    noteCircle = Math.round((acceleration.gamma + 90) / 3.6) - 15;
     circle.y = noteCircle;
 
     debugText.text = 'gamma: ' + roundIt(acceleration.gamma) + '\ncircle: ' + noteCircle;
