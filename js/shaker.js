@@ -39,9 +39,9 @@ shakerMain.prototype = {
 		
 	    debugText = game.add.text(100, 30, "debug", {font: '22px', fill: 'white'});
     
-
+		try{window.addEventListener('deviceorientation', readAccel);}catch(e){}
+		
         //try{navigator.accelerometer.watchAcceleration(readAccel, onError, { frequency: 1});} catch(e){}
-        try{navigator.rotationvector.watchRotationVector(readAccel,onError, { frequency: 1});} catch(e){}
     }
 };
 
@@ -52,7 +52,7 @@ function readAccel(acceleration){
           'beta: ' + acceleration.beta + '\n' +
           'gamma: ' + acceleration.gamma;
     
-    circle.y = MIDDLE + acceleration.beta * (INIT_SENS + sensFactor);
+    circle.y = acceleration.gamma * (INIT_SENS + sensFactor);
    
    /* if (Math.abs(acceleration.x) > 1.8){
     	circle.body.velocity.y = acceleration.x * (INIT_SENS + sensFactor);
