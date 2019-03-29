@@ -10,6 +10,8 @@ var shakerMain = function(game){
 
 	INIT_SIZE = 0.82;
 	INIT_SENS = 1; // 7.55
+	
+	noteCircle = 0;
 };
 
 shakerMain.prototype = {
@@ -47,10 +49,11 @@ shakerMain.prototype = {
 
 function readAccel(acceleration){	
     //circle.y = MIDDLE + acceleration.x * (INIT_SENS + sensFactor);
-
-    circle.y = roundIt(((acceleration.gamma / 3.6) * -1) - 18) ;
     
-    debugText.text = roundIt(acceleration.gamma) + '\n' + circle.y;
+    noteCircle = Math.round((gamma + 90) / 3.6) - 15;
+    circle.y = noteCircle;
+
+    debugText.text = 'gamma: ' + roundIt(acceleration.gamma) + '\ncircle: ' + noteCircle;
    
    /* if (Math.abs(acceleration.x) > 1.8){
     	circle.body.velocity.y = acceleration.x * (INIT_SENS + sensFactor);
