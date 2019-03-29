@@ -3,6 +3,9 @@ var trombMain = function(game){
 	accelY = 0;
 	muteTimer = null;
 	notesToPlay = [];
+	
+	INIT_FADE = 25;
+	fadeFactor = 0;
 };
 
 trombMain.prototype = {
@@ -19,6 +22,8 @@ trombMain.prototype = {
         angleText2 = game.add.text(250, 50, "Play it!", {font: '32px', fill: 'white'});
         
        	try{window.addEventListener('deviceorientation', readTrombAccel);}catch(e){}
+       	
+       	TrombUIbuttons();
 
 		//try{navigator.accelerometer.watchAcceleration(readTrombAccel, onError, { frequency: 250 });} catch(e){}	
     }
@@ -34,10 +39,10 @@ function readTrombAccel(acceleration){
 		
 		if (prev_reading != accelY){
 			if (accelY < 8){
-				notesToPlay[accelY].fadeIn(25);
+				notesToPlay[accelY].fadeIn(INIT_FADE + fadeFactor);
 				
-				if (accelY > 0){
-					try{ notesToPlay[prev_reading].fadeOut(25); }catch(e){}
+				if (accelY > -1){
+					try{ notesToPlay[prev_reading].fadeOut(INIT_FADE + fadeFactor); }catch(e){}
 				}
 			}
 		}
@@ -87,4 +92,33 @@ function loadHorn(){
 	notesToPlay = [
 		sfx1, sfx2, sfx3, sfx4,sfx5, sfx6, sfx7, sfx8
 	];
+}
+
+function TrombUIbuttons(){
+    plusT = game.add.sprite(620, 100, 'plus');
+    plusT.scale.set(.85, .85);
+    plusT.alpha = 0.85;
+    plusT.inputEnabled = true;
+    plusT.events.onInputDown.add(function(){
+    	fadeFactor += 5;
+    	fadeText.text = "Fade\nfactor: " + roundIt(fadeFactor);
+    	plusT.tint = 0xf04030;
+    	setTimeout(function(){plusT.tint = 0xffffff;},100);
+    }, this);
+    
+    minusT = game.add.sprite(525, 100, 'minus');
+    minusT.scale.set(.85, .85);
+    minusT.alpha = 0.85;
+    minusT.inputEnabled = true;
+    minusT.events.onInputDown.add(function(){
+    	if (INIT_FADE + fadeFactor > 0){
+	    	fadeFactor -= 5;
+	    	fadeText.text = "Fade\nfactor: " + roundIt(fadeFactor);
+	    	minusT.tint = 0xf04030;
+	    	setTimeout(function(){minusT.tint = 0xffffff;},100);
+    	}
+    }, this);
+	
+    fadeText = game.add.text(530, 30, "Fade\nfactor: " + roundIt(fadeFactor), 
+    {font: '22px', fill: 'white'});
 }
