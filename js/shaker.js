@@ -4,19 +4,19 @@ var shakerMain = function(game){
 	
 	MIDDLE = null;
 
-	sensFactor = 1;
+	sensFactor = 0;
 	distanceFactor = 0;
 	resetTouching = true;
 	
-	INIT_SIZE = 0.67;
-	INIT_SENS = 1;
+	INIT_SIZE = 0.7;
+	INIT_SENS = 60;
 };
 
 shakerMain.prototype = {
     create: function(){
     	game.stage.backgroundColor = '#002255';
     	
-    	sensFactor = 1;
+    	sensFactor = 0;
     	distanceFactor = 0;
 
     	bg = game.add.image(0, 0, 'bg');

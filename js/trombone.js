@@ -33,10 +33,12 @@ function readTrombAccel(acceleration){
 		angleText2.text = accelY;
 		
 		if (prev_reading != accelY){
-			try{ notesToPlay[prev_reading].stop(); }catch(e){}
-			
 			if (accelY < 8){
 				notesToPlay[accelY].play();
+				
+				if (accelY > 0){
+					try{ notesToPlay[prev_reading].fadeOut(100); }catch(e){}
+				}
 			}
 		}
 		
