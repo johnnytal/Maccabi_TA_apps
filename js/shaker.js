@@ -48,7 +48,7 @@ shakerMain.prototype = {
 function readAccel(acceleration){	
     //circle.y = MIDDLE + acceleration.x * (INIT_SENS + sensFactor);
 
-    circle.y = ((acceleration.gamma / 3.6) * -1) - 18 ;
+    circle.y = roundIt(((acceleration.gamma / 3.6) * -1) - 18) ;
     
     debugText.text = roundIt(acceleration.gamma) + '\n' + circle.y;
    
