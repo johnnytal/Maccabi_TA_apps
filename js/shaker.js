@@ -4,19 +4,19 @@ var shakerMain = function(game){
 	
 	MIDDLE = null;
 
-	sensFactor = 0;
+	sensFactor = 1;
 	distanceFactor = 0;
 	resetTouching = true;
 	
 	INIT_SIZE = 0.67;
-	INIT_SENS = 7.8;
+	INIT_SENS = 1;
 };
 
 shakerMain.prototype = {
     create: function(){
     	game.stage.backgroundColor = '#002255';
     	
-    	sensFactor = 0;
+    	sensFactor = 1;
     	distanceFactor = 0;
 
     	bg = game.add.image(0, 0, 'bg');
@@ -42,9 +42,10 @@ shakerMain.prototype = {
 };
 
 function readAccel(acceleration){	
-    circle.y = MIDDLE + acceleration.x * (INIT_SENS + sensFactor);
+    //circle.y = MIDDLE + acceleration.x * (INIT_SENS + sensFactor);
+    circle.body.velocity.y = acceleration.x * (INIT_SENS + sensFactor);
     
-	if (!resetTouching && Math.abs(circle.y - MIDDLE) < 22){
+	if (!resetTouching && Math.abs(circle.y - MIDDLE) < 25){
 		resetTouching = true;
 	}
 	
