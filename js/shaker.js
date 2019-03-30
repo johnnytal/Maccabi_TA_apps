@@ -27,7 +27,7 @@ shakerMain.prototype = {
 		circles.physicsBodyType = Phaser.Physics.ARCADE;
 		
 		circle = circles.create(0, 0, 'green');
-		circle.scale.set(0.82, 0.82);
+		circle.scale.set(0.88, 0.88);
 
         circle.x = WIDTH / 2 - circle.width / 2;
         MIDDLE = HEIGHT / 2 - circle.height / 2;
@@ -44,7 +44,7 @@ shakerMain.prototype = {
 };
 
 function readAccel(event){	
-	circle.body.velocity.y = event.acceleration.x * (INIT_SENS + sensFactor); //MIDDLE + // (-1 * event.rotationRate.gamma)
+	circle.body.velocity.y = event.acceleration.x * (INIT_SENS + sensFactor) + 0 + distanceFactor; //MIDDLE + // (-1 * event.rotationRate.gamma)
 	
 	debugText.text = 'Velocity: ' + Math.round(circle.body.velocity.y) + 
 	'\nAccel: ' + Math.round(event.acceleration.x);
@@ -61,7 +61,7 @@ function readAccel(event){
 				flash(FRONT_COLOR);	
 			}
 	    	
-	    	else if (circle.body.y > HEIGHT - distanceFactor) { // back 
+	    	else if (circle.body.blocked.down) { // back 
 	    		//back.volume = Math.abs(acceleration.x / 10);   		
 				back.play();
 				flash(BACK_COLOR);
@@ -99,7 +99,7 @@ function XtraUIbuttons(){
     plus.alpha = 0.85;
     plus.inputEnabled = true;
     plus.events.onInputDown.add(function(){
-    	sensFactor += 5;
+    	sensFactor += 10;
     	sensText.text = "Sensitivity\nfactor: " + roundIt(sensFactor);
     	plus.tint = 0xf04030;
     	setTimeout(function(){plus.tint = 0xffffff;},100);
@@ -110,7 +110,7 @@ function XtraUIbuttons(){
     minus.alpha = 0.85;
     minus.inputEnabled = true;
     minus.events.onInputDown.add(function(){
-    	sensFactor -= 5;
+    	sensFactor -= 10;
     	sensText.text = "Sensitivity\nfactor: " + roundIt(sensFactor);
     	minus.tint = 0xf04030;
     	setTimeout(function(){minus.tint = 0xffffff;},100);
@@ -121,7 +121,7 @@ function XtraUIbuttons(){
     plusD.alpha = 0.85;
     plusD.inputEnabled = true;
     plusD.events.onInputDown.add(function(){
-    	distanceFactor += 1;
+    	distanceFactor += 10;
     	distanceText.text = "Size\nfactor: " + roundIt(distanceFactor);
     	plusD.tint = 0xf04030;
     	//circle.scale.set(INIT_SIZE + distanceFactor);
@@ -133,7 +133,7 @@ function XtraUIbuttons(){
     minusD.alpha = 0.85;
     minusD.inputEnabled = true;
     minusD.events.onInputDown.add(function(){
-    	distanceFactor -= 1;
+    	distanceFactor -= 10;
     	distanceText.text = "Size\nfactor: " + roundIt(distanceFactor);
     	minusD.tint = 0xf04030;
     	//circle.scale.set(INIT_SIZE + distanceFactor);
