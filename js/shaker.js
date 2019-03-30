@@ -9,7 +9,7 @@ var shakerMain = function(game){
 	distanceFactor = 0;
 
 	INIT_SIZE = 100; // 0.82
-	INIT_SENS = 240; // 7.55
+	INIT_SENS = 600; // 7.55
 };
 
 shakerMain.prototype = {
@@ -27,7 +27,7 @@ shakerMain.prototype = {
 		circles.physicsBodyType = Phaser.Physics.ARCADE;
 		
 		circle = circles.create(0, 0, 'green');
-		circle.scale.set(0.88, 0.88);
+		circle.scale.set(0.86, 0.86);
 
         circle.x = WIDTH / 2 - circle.width / 2;
         MIDDLE = HEIGHT / 2 - circle.height / 2;
@@ -55,13 +55,13 @@ function readAccel(event){
 	
 	if (game.state.getCurrentState().key == 'Shaker'){
 		if (resetTouching){	 	
-	    	if (circle.body.blocked.up){ // front
+	    	if (circle.y < 1){ // front
 	    		//front.volume = Math.abs(acceleration.x / 10);
 				front.play();
 				flash(FRONT_COLOR);	
 			}
 	    	
-	    	else if (circle.body.blocked.down) { // back 
+	    	else if (circle.y > HEIGHT - 1) { // back 
 	    		//back.volume = Math.abs(acceleration.x / 10);   		
 				back.play();
 				flash(BACK_COLOR);
