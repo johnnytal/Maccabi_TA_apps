@@ -61,7 +61,7 @@ function readAccel(acceleration){
    
    // volume = Math.abs(acceleration.x / 10);
     
-	if (circle.y > 2 && circle.y < HEIGHT - 2){
+	if (!resetTouching && Math.abs(circle.y - MIDDLE) < 25){
 		resetTouching = true;
 	}
 	
