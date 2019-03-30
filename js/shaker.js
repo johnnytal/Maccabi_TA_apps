@@ -9,7 +9,7 @@ var shakerMain = function(game){
 	distanceFactor = 0;
 
 	INIT_SIZE = 100; // 0.82
-	INIT_SENS = 600; // 7.55
+	INIT_SENS = 7.55; // 7.55
 };
 
 shakerMain.prototype = {
@@ -44,10 +44,10 @@ shakerMain.prototype = {
 };
 
 function readAccel(event){	
-	circle.body.gravity.y = event.acceleration.x * (INIT_SENS + sensFactor) + distanceFactor; //MIDDLE + // (-1 * event.rotationRate.gamma)
-	
-	debugText.text = 'Gravity: ' + Math.round(circle.body.gravity.y) + 
-	'\nAccel: ' + Math.round(event.acceleration.x);
+
+	circle.body.y = MIDDLE + event.acceleration.x * (INIT_SENS + sensFactor) + distanceFactor; // (-1 * event.rotationRate.gamma)
+
+	debugText.text = 'Accel: ' + Math.round(event.acceleration.x);
 	
 	if (!resetTouching && Math.abs(circle.y - MIDDLE) < 22){
 		resetTouching = true;
