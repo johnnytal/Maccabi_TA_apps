@@ -45,7 +45,7 @@ shakerMain.prototype = {
 
 function readAccel(event){	
 
-	circle.y = MIDDLE + event.accelerationIncludingGravity.x * (INIT_SENS + sensFactor) + distanceFactor; // (-1 * event.rotationRate.gamma)
+	//circle.y = MIDDLE + event.accelerationIncludingGravity.x * (INIT_SENS + sensFactor) + distanceFactor; // (-1 * event.rotationRate.gamma)
 
 	debugText.text = 'Accel: ' + Math.round(event.accelerationIncludingGravity.x);
 	
@@ -54,7 +54,15 @@ function readAccel(event){
 	}
 	
 	if (game.state.getCurrentState().key == 'Shaker'){
-		if (resetTouching){	 	
+		if (event.accelerationIncludingGravity.x < -12 - sensFactor && !front.isPlaying){
+			front.play();
+			flash(FRONT_COLOR);	
+		}
+		else if (event.accelerationIncludingGravity.x < 12 + sensFactor && !back.isPlaying){
+			back.play();
+			flash(BACK_COLOR);
+		}
+		/*if (resetTouching){	 	
 	    	if (circle.body.blocked.up){ // front
 	    		//front.volume = Math.abs(acceleration.x / 10);
 				front.play();
@@ -66,7 +74,7 @@ function readAccel(event){
 				back.play();
 				flash(BACK_COLOR);
 			}	
-		}
+		}*/
 	}
 }
 
