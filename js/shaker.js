@@ -8,8 +8,8 @@ var shakerMain = function(game){
 	sensFactor = 0;
 	distanceFactor = 0;
 
-	INIT_SIZE = 0.82; // 0.82
-	INIT_SENS = 770; // 7.55
+	INIT_SIZE = 100; // 0.82
+	INIT_SENS = 850; // 7.55
 };
 
 shakerMain.prototype = {
@@ -27,7 +27,7 @@ shakerMain.prototype = {
 		circles.physicsBodyType = Phaser.Physics.ARCADE;
 		
 		circle = circles.create(0, 0, 'green');
-		circle.scale.set(INIT_SIZE, INIT_SIZE);
+		circle.scale.set(0.82, 0.82);
 
         circle.x = WIDTH / 2 - circle.width / 2;
         MIDDLE = HEIGHT / 2 - circle.height / 2;
@@ -37,19 +37,14 @@ shakerMain.prototype = {
         
 		XtraUIbuttons();
 
-       // try{navigator.accelerometer.watchAcceleration(readAccel, onError, { frequency: 1});} catch(e){}
         try{window.addEventListener("devicemotion",readAccel, true);} catch(e){}
     }
 };
 
 function readAccel(event){	
-	if (Math.abs(event.acceleration.x) > 1.5){
-    	circle.body.gravity.y = event.acceleration.x * (INIT_SENS + sensFactor); //MIDDLE +
-    }
-    else{
-    	circle.body.gravity.y = 0;
-    }
-    
+	circle.body.gravity.y = event.acceleration.x * (INIT_SENS + sensFactor); //MIDDLE +
+	circle.body.velocity.y = 100 + distanceFactor;
+
 	if (!resetTouching && Math.abs(circle.y - MIDDLE) < 22){
 		resetTouching = true;
 	}
@@ -125,7 +120,7 @@ function XtraUIbuttons(){
     	distanceFactor += 0.05;
     	distanceText.text = "Size\nfactor: " + roundIt(distanceFactor);
     	plusD.tint = 0xf04030;
-    	circle.scale.set(INIT_SIZE + distanceFactor);
+    	//circle.scale.set(INIT_SIZE + distanceFactor);
     	setTimeout(function(){plusD.tint = 0xffffff;},100);
     }, this);
     
@@ -137,7 +132,7 @@ function XtraUIbuttons(){
     	distanceFactor -= 0.05;
     	distanceText.text = "Size\nfactor: " + roundIt(distanceFactor);
     	minusD.tint = 0xf04030;
-    	circle.scale.set(INIT_SIZE + distanceFactor);
+    	//circle.scale.set(INIT_SIZE + distanceFactor);
     	setTimeout(function(){minusD.tint = 0xffffff;},100);
     }, this);
 	
