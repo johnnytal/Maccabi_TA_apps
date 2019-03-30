@@ -44,7 +44,7 @@ shakerMain.prototype = {
 };
 
 function readAccel(event){	
-	circle.body.gravity.y = event.acceleration.x * (INIT_SENS + sensFactor) + 50; //MIDDLE + // (-1 * event.rotationRate.gamma)
+	circle.body.gravity.y = event.acceleration.x * (INIT_SENS + sensFactor) + distanceFactor; //MIDDLE + // (-1 * event.rotationRate.gamma)
 	
 	debugText.text = 'Gravity: ' + Math.round(circle.body.gravity.y) + 
 	'\nAccel: ' + Math.round(event.acceleration.x);
@@ -55,13 +55,13 @@ function readAccel(event){
 	
 	if (game.state.getCurrentState().key == 'Shaker'){
 		if (resetTouching){	 	
-	    	if (circle.y < 5 + distanceFactor){ // front
+	    	if (circle.body.blocked.up){ // front
 	    		//front.volume = Math.abs(acceleration.x / 10);
 				front.play();
 				flash(FRONT_COLOR);	
 			}
 	    	
-	    	else if (circle.y > 395 + distanceFactor) { // back 
+	    	else if (circle.body.blocked.down) { // back 
 	    		//back.volume = Math.abs(acceleration.x / 10);   		
 				back.play();
 				flash(BACK_COLOR);
@@ -121,7 +121,7 @@ function XtraUIbuttons(){
     plusD.alpha = 0.85;
     plusD.inputEnabled = true;
     plusD.events.onInputDown.add(function(){
-    	distanceFactor += 1;
+    	distanceFactor += 5;
     	distanceText.text = "Size\nfactor: " + roundIt(distanceFactor);
     	plusD.tint = 0xf04030;
     	//circle.scale.set(INIT_SIZE + distanceFactor);
@@ -133,7 +133,7 @@ function XtraUIbuttons(){
     minusD.alpha = 0.85;
     minusD.inputEnabled = true;
     minusD.events.onInputDown.add(function(){
-    	distanceFactor -= 1;
+    	distanceFactor -= 5;
     	distanceText.text = "Size\nfactor: " + roundIt(distanceFactor);
     	minusD.tint = 0xf04030;
     	//circle.scale.set(INIT_SIZE + distanceFactor);
