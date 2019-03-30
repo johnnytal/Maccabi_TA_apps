@@ -49,32 +49,21 @@ function readAccel(event){
 
 	debugText.text = 'Accel: ' + Math.round(event.accelerationIncludingGravity.x);
 	
-	if (!resetTouching && Math.abs(circle.y - MIDDLE) < 25){
+	if (!resetTouching && event.accelerationIncludingGravity.x > -2.5 && event.accelerationIncludingGravity.x < 2.5){
 		resetTouching = true;
 	}
 	
 	if (game.state.getCurrentState().key == 'Shaker'){
-		if (event.accelerationIncludingGravity.x < (-INIT_SENS - sensFactor) && !front.isPlaying && !back.isPlaying){
-			front.play();
-			flash(FRONT_COLOR);	
-		}
-		else if (event.accelerationIncludingGravity.x > ((INIT_SENS / 1.5) + sensFactor)  && !front.isPlaying && !back.isPlaying){
-			back.play();
-			flash(BACK_COLOR);
-		}
-		/*if (resetTouching){	 	
-	    	if (circle.body.blocked.up){ // front
-	    		//front.volume = Math.abs(acceleration.x / 10);
+		if (resetTouching){
+			if (event.accelerationIncludingGravity.x < (-INIT_SENS - sensFactor) && !front.isPlaying && !back.isPlaying){
 				front.play();
 				flash(FRONT_COLOR);	
 			}
-	    	
-	    	else if (circle.body.blocked.down) { // back 
-	    		//back.volume = Math.abs(acceleration.x / 10);   		
+			else if (event.accelerationIncludingGravity.x > ((INIT_SENS + sensFactor) / 1.5)  && !front.isPlaying && !back.isPlaying){
 				back.play();
 				flash(BACK_COLOR);
-			}	
-		}*/
+			}
+		}
 	}
 }
 
