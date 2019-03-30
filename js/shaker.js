@@ -5,19 +5,19 @@ var shakerMain = function(game){
 	MIDDLE = null;
 	resetTouching = true;;
 
-	sensFactor = 0;
-	distanceFactor = 0;
+	frontAngle = 0;
+	backAngle = 0;
 
-	INIT_SIZE = 100; // 0.82
-	INIT_SENS = 30 ; // 7.55
+	INIT_FRONT = 20; // 0.82
+	INIT_BACK = -5 ; // 7.55
 };
 
 shakerMain.prototype = {
     create: function(){
     	game.stage.backgroundColor = '#002255';
     	
-    	sensFactor = 0;
-    	distanceFactor = 0;
+    	frontAngle = 0;
+    	backAngle = 0;
 
     	bg = game.add.image(0, 0, 'bg');
     	bg.alpha = 0.6;
@@ -50,17 +50,17 @@ function readAccel(event){
 
 	debugText.text = 'Gamma: ' + roundIt(event.gamma);
 	
-	if (!resetTouching && event.gamma > (5 + sensFactor) && event.gamma < (15 + sensFactor)){
+	if (!resetTouching && event.gamma > ((INIT_BACK + backAngle) + 3) && event.gamma < ((INIT_FRONT + frontAngle) - 3)){
 		resetTouching = true;
 	}
 	
 	if (game.state.getCurrentState().key == 'Shaker'){
 		if (resetTouching){
-			if (event.gamma > (25 + sensFactor) && !front.isPlaying && !back.isPlaying){
+			if (event.gamma > (INIT_FRONT + frontAngle) && !front.isPlaying && !back.isPlaying){
 				front.play();
 				flash(FRONT_COLOR);	
 			}
-			else if (event.gamma < (-5 + sensFactor) && !front.isPlaying && !back.isPlaying){
+			else if (event.gamma < (INIT_BACK + backAngle) && !front.isPlaying && !back.isPlaying){
 				back.play();
 				flash(BACK_COLOR);
 			}
@@ -97,8 +97,8 @@ function XtraUIbuttons(){
     plus.alpha = 0.85;
     plus.inputEnabled = true;
     plus.events.onInputDown.add(function(){
-    	sensFactor += 0.1;
-    	sensText.text = "Sensitivity\nfactor: " + roundIt(sensFactor);
+    	frontAngle += 0.1;
+    	frontText.text = "Front\nAngle: " + roundIt(INIT_FRONT + frontAngle);
     	plus.tint = 0xf04030;
     	setTimeout(function(){plus.tint = 0xffffff;},100);
     }, this);
@@ -108,8 +108,8 @@ function XtraUIbuttons(){
     minus.alpha = 0.85;
     minus.inputEnabled = true;
     minus.events.onInputDown.add(function(){
-    	sensFactor -= 0.1;
-    	sensText.text = "Sensitivity\nfactor: " + roundIt(sensFactor);
+    	frontAngle -= 0.1;
+    	frontText.text = "Front\nAngle: " + roundIt(INIT_FRONT + frontAngle);
     	minus.tint = 0xf04030;
     	setTimeout(function(){minus.tint = 0xffffff;},100);
     }, this);
@@ -119,8 +119,8 @@ function XtraUIbuttons(){
     plusD.alpha = 0.85;
     plusD.inputEnabled = true;
     plusD.events.onInputDown.add(function(){
-    	distanceFactor += 1;
-    	distanceText.text = "Size\nfactor: " + roundIt(distanceFactor);
+    	backAngle += 0.1;
+    	backText.text = "Back\nAngle: " + roundIt(INIT_BACK + backAngle);
     	plusD.tint = 0xf04030;
     	//circle.scale.set(INIT_SIZE + distanceFactor);
     	setTimeout(function(){plusD.tint = 0xffffff;},100);
@@ -131,17 +131,17 @@ function XtraUIbuttons(){
     minusD.alpha = 0.85;
     minusD.inputEnabled = true;
     minusD.events.onInputDown.add(function(){
-    	distanceFactor -= 1;
-    	distanceText.text = "Size\nfactor: " + roundIt(distanceFactor);
+    	backAngle -= 0.1;
+    	backText.text = "Back\nAngle: " + roundIt(INIT_BACK + backAngle);
     	minusD.tint = 0xf04030;
     	//circle.scale.set(INIT_SIZE + distanceFactor);
     	setTimeout(function(){minusD.tint = 0xffffff;},100);
     }, this);
 	
-    distanceText = game.add.text(530, 30, "Size\nfactor: " + roundIt(distanceFactor), 
+    backText = game.add.text(530, 30, "Back\nAngle: " + roundIt(INIT_BACK + backAngle),
     {font: '22px', fill: 'white'});
     
-    sensText = game.add.text(530, 230, "Sensitivity\nfactor: " + roundIt(sensFactor), 
+    frontText = game.add.text(530, 230, "Front\nAngle: " + roundIt(INIT_FRONT + frontAngle),
     {font: '22px', fill: 'white'});
 }
 
