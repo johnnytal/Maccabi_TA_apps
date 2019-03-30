@@ -8,8 +8,8 @@ var shakerMain = function(game){
 	sensFactor = 0;
 	distanceFactor = 0;
 
-	INIT_SIZE = 0.9;
-	INIT_SENS = 11; // 7.55
+	INIT_SIZE = 0.82; // 0.82
+	INIT_SENS = 7.55; // 7.55
 };
 
 shakerMain.prototype = {
@@ -39,29 +39,26 @@ shakerMain.prototype = {
 		
 	    debugText = game.add.text(100, 30, "debug", {font: '22px', fill: 'white'});
     
-		try{window.addEventListener('deviceorientation', readAccel);}catch(e){}
+		//try{window.addEventListener('deviceorientation', readAccel);}catch(e){}
 		
-        //try{navigator.accelerometer.watchAcceleration(readAccel, onError, { frequency: 1});} catch(e){}
+        try{navigator.accelerometer.watchAcceleration(readAccel, onError, { frequency: 1});} catch(e){}
     }
 };
 
 function readAccel(acceleration){	
-    //circle.y = MIDDLE + acceleration.x * (INIT_SENS + sensFactor);
-	
-	if (circle.y > -1 && circle.y < HEIGHT - 1){
+    circle.y = MIDDLE + acceleration.x * (INIT_SENS + sensFactor);
+   
+    if (Math.abs(acceleration.x) > 1.5){
+    	circle.y = acceleration.x * (INIT_SENS + sensFactor);
+    }
+
+	/*if (circle.y > -1 && circle.y < HEIGHT - 1){
     	circle.y = roundIt(MIDDLE + 11 + sensFactor + (acceleration.gamma * (-3.7 + distanceFactor)));
-    }
-    
-    debugText.text = roundIt(acceleration.gamma) + '\n' + circle.y;
-   
-   /* if (Math.abs(acceleration.x) > 1.8){
-    	circle.body.velocity.y = acceleration.x * (INIT_SENS + sensFactor);
-    }
-    else{
-    	circle.body.velocity.y = 0;
     }*/
-   
-   // volume = Math.abs(acceleration.x / 10);
+    
+    //debugText.text = roundIt(acceleration.gamma) + '\n' + circle.y;
+
+    // volume = Math.abs(acceleration.x / 10);
     
 	if (!resetTouching && Math.abs(circle.y - MIDDLE) < 25){
 		resetTouching = true;
@@ -136,7 +133,7 @@ function XtraUIbuttons(){
     	distanceFactor += 0.05;
     	distanceText.text = "Size\nfactor: " + roundIt(distanceFactor);
     	plusD.tint = 0xf04030;
-    	//circle.scale.set(INIT_SIZE + distanceFactor);
+    	circle.scale.set(INIT_SIZE + distanceFactor);
     	setTimeout(function(){plusD.tint = 0xffffff;},100);
     }, this);
     
@@ -148,7 +145,7 @@ function XtraUIbuttons(){
     	distanceFactor -= 0.05;
     	distanceText.text = "Size\nfactor: " + roundIt(distanceFactor);
     	minusD.tint = 0xf04030;
-    	//circle.scale.set(INIT_SIZE + distanceFactor);
+    	circle.scale.set(INIT_SIZE + distanceFactor);
     	setTimeout(function(){minusD.tint = 0xffffff;},100);
     }, this);
 	
