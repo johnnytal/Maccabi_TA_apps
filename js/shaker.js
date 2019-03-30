@@ -44,9 +44,9 @@ shakerMain.prototype = {
 };
 
 function readAccel(event){	
-	circle.body.velocity.y = event.acceleration.x * (INIT_SENS + sensFactor) + 50; //MIDDLE + // (-1 * event.rotationRate.gamma)
+	circle.body.gravity.y = event.acceleration.x * (INIT_SENS + sensFactor) + 50; //MIDDLE + // (-1 * event.rotationRate.gamma)
 	
-	debugText.text = 'Velocity: ' + Math.round(circle.body.velocity.y) + 
+	debugText.text = 'Gravity: ' + Math.round(circle.body.gravity.y) + 
 	'\nAccel: ' + Math.round(event.acceleration.x);
 	
 	if (!resetTouching && Math.abs(circle.y - MIDDLE) < 22){
@@ -61,7 +61,7 @@ function readAccel(event){
 				flash(FRONT_COLOR);	
 			}
 	    	
-	    	else if (circle.y > HEIGHT - 5 + distanceFactor) { // back 
+	    	else if (circle.y > 395 + distanceFactor) { // back 
 	    		//back.volume = Math.abs(acceleration.x / 10);   		
 				back.play();
 				flash(BACK_COLOR);
