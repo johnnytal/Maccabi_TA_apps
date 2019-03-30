@@ -44,11 +44,11 @@ shakerMain.prototype = {
 };
 
 function readAccel(event){	
-	circle.body.gravity.y = roundIt(event.acceleration.x * (INIT_SENS + sensFactor) + event.rotationRate.beta); //MIDDLE +
+	circle.body.gravity.y = event.acceleration.x * (INIT_SENS + sensFactor) + event.rotationRate.gamma; //MIDDLE +
 	
-	debugText.text = 'Gravity: ' + circle.body.gravity.y + 
-	'\nAccel: ' + roundIt(event.acceleration.x) + 
-	'\nBeta: ' + roundIt(event.rotationRate.beta);
+	debugText.text = 'Gravity: ' + Math.round(circle.body.gravity.y) + 
+	'\nAccel: ' + Math.round(event.acceleration.x) + 
+	'\nGamma: ' + Math.round(event.rotationRate.gamma);
 	
 	if (!resetTouching && Math.abs(circle.y - MIDDLE) < 22){
 		resetTouching = true;
