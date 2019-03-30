@@ -54,11 +54,11 @@ function readAccel(event){
 	}
 	
 	if (game.state.getCurrentState().key == 'Shaker'){
-		if (event.accelerationIncludingGravity.x < -12 - sensFactor && !front.isPlaying){
+		if (event.accelerationIncludingGravity.x < (-12 - sensFactor) && !front.isPlaying){
 			front.play();
 			flash(FRONT_COLOR);	
 		}
-		else if (event.accelerationIncludingGravity.x < 12 + sensFactor && !back.isPlaying){
+		else if (event.accelerationIncludingGravity.x > (12 + sensFactor) && !back.isPlaying){
 			back.play();
 			flash(BACK_COLOR);
 		}
