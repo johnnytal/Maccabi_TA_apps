@@ -9,7 +9,7 @@ var shakerMain = function(game){
 	distanceFactor = 0;
 
 	INIT_SIZE = 0.82; // 0.82
-	INIT_SENS = 7.55; // 7.55
+	INIT_SENS = 100; // 7.55
 };
 
 shakerMain.prototype = {
@@ -42,7 +42,7 @@ shakerMain.prototype = {
 };
 
 function readAccel(acceleration){	
-    circle.y = MIDDLE + acceleration.x * (INIT_SENS + sensFactor);
+    circle.body.gravity.y = acceleration.x * (INIT_SENS + sensFactor); //MIDDLE +
     
 	if (!resetTouching && Math.abs(circle.y - MIDDLE) < 22){
 		resetTouching = true;
@@ -94,7 +94,7 @@ function XtraUIbuttons(){
     plus.alpha = 0.85;
     plus.inputEnabled = true;
     plus.events.onInputDown.add(function(){
-    	sensFactor += 0.1;
+    	sensFactor += 10;
     	sensText.text = "Sensitivity\nfactor: " + roundIt(sensFactor);
     	plus.tint = 0xf04030;
     	setTimeout(function(){plus.tint = 0xffffff;},100);
@@ -105,7 +105,7 @@ function XtraUIbuttons(){
     minus.alpha = 0.85;
     minus.inputEnabled = true;
     minus.events.onInputDown.add(function(){
-    	sensFactor -= 0.1;
+    	sensFactor -= 10;
     	sensText.text = "Sensitivity\nfactor: " + roundIt(sensFactor);
     	minus.tint = 0xf04030;
     	setTimeout(function(){minus.tint = 0xffffff;},100);
