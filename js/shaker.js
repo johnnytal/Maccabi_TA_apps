@@ -3,7 +3,7 @@ var shakerMain = function(game){
 	BACK_COLOR = '#656d7c';
 	
 	MIDDLE = null;
-	resetTouching = true;
+	resetTouching = true;;
 
 	sensFactor = 0;
 	distanceFactor = 0;
@@ -36,41 +36,28 @@ shakerMain.prototype = {
         circle.body.collideWorldBounds = true;
         
 		XtraUIbuttons();
-		
-	    debugText = game.add.text(100, 30, "debug", {font: '22px', fill: 'white'});
-    
-		//try{window.addEventListener('deviceorientation', readAccel);}catch(e){}
-		
+
         try{navigator.accelerometer.watchAcceleration(readAccel, onError, { frequency: 1});} catch(e){}
     }
 };
 
 function readAccel(acceleration){	
-
-	if (circle.y > 0 || circle.y < HEIGHT){
-		circle.y = MIDDLE + 11 + acceleration.x * (INIT_SENS + sensFactor);
-    }
-
-	/*if (circle.y > -1 && circle.y < HEIGHT - 1){
-    	circle.y = roundIt(MIDDLE + 11 + sensFactor + (acceleration.gamma * (-3.7 + distanceFactor)));
-    }*/
+    circle.y = MIDDLE + acceleration.x * (INIT_SENS + sensFactor);
     
-    //debugText.text = roundIt(acceleration.gamma) + '\n' + circle.y;
-
-    // volume = Math.abs(acceleration.x / 10);
-    
-	if (!resetTouching && Math.abs(circle.y - MIDDLE) < 25){
+	if (!resetTouching && Math.abs(circle.y - MIDDLE) < 22){
 		resetTouching = true;
 	}
 	
 	if (game.state.getCurrentState().key == 'Shaker'){
 		if (resetTouching){	 	
 	    	if (circle.body.blocked.up){ // front
+	    		front.volume = Math.abs(acceleration.x / 10);
 				front.play();
 				flash(FRONT_COLOR);	
 			}
 	    	
-	    	else if (circle.body.blocked.down) { // back  		
+	    	else if (circle.body.blocked.down) { // back 
+	    		back.volume = Math.abs(acceleration.x / 10);   		
 				back.play();
 				flash(BACK_COLOR);
 			}	
