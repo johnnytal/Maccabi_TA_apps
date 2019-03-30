@@ -11,6 +11,8 @@ var shakerMain = function(game){
 
 	INIT_FRONT = 22;
 	INIT_BACK = -3;
+	
+	volume = 0;
 };
 
 shakerMain.prototype = {
@@ -32,11 +34,16 @@ shakerMain.prototype = {
 		
 	    debugText = game.add.text(110, 30, "" , {font: '24px', fill: 'white'});
 		
-		try{window.addEventListener('deviceorientation', readAccel);}catch(e){}
+		try{window.addEventListener('deviceorientation', readAngle);}catch(e){}
+		try{window.addEventListener("devicemotion", readAccel, true);}catch(e){}
     }
 };
 
-function readAccel(event){	
+function readAccel(event){
+	volume = Math.abs(event.accelerationIncludingGravity.x) /  22;
+}
+
+function readAngle(event){	
 	angle = roundIt(event.gamma);
 	
 	debugText.text = 'Angle: ' + angle;
@@ -48,16 +55,17 @@ function readAccel(event){
 	if (game.state.getCurrentState().key == 'Shaker'){
 
 		if (angle > (INIT_FRONT + frontAngle) && (lastPlayed == 'back' || resetTouching)){
+			front.volume = volume;
 			front.play();
 			flash(FRONT_COLOR);	
 			lastPlayed = 'front';
 		}
 		else if (angle < (INIT_BACK + backAngle) && (lastPlayed == 'front' || resetTouching)){
+			back.volume = volume;
 			back.play();
 			flash(BACK_COLOR);
 			lastPlayed = 'back';
-		}
-		
+		}	
 	}
 }
 
