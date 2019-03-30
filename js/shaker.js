@@ -30,7 +30,7 @@ shakerMain.prototype = {
  
 		XtraUIbuttons();
 		
-	    debugText = game.add.text(110, 30, "" , {font: '23px', fill: 'white'});
+	    debugText = game.add.text(110, 30, "" , {font: '24px', fill: 'white'});
 		
 		try{window.addEventListener('deviceorientation', readAccel);}catch(e){}
     }
@@ -131,8 +131,8 @@ function XtraUIbuttons(){
     }, this);
 	
     backText = game.add.text(545, 40, "BACK: " + roundIt(INIT_BACK + backAngle),
-    {font: '23px', fill: 'white'});
+    {font: '24px', fill: 'white'});
     
     frontText = game.add.text(545, 240, "FRONT: " + roundIt(INIT_FRONT + frontAngle),
-    {font: '23px', fill: 'white'});
+    {font: '24px', fill: 'white'});
 }
