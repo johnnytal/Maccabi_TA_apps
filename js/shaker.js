@@ -45,7 +45,7 @@ shakerMain.prototype = {
 
 function readAccel(event){	
 
-	circle.body.y = MIDDLE + event.acceleration.x * (INIT_SENS + sensFactor) + distanceFactor; // (-1 * event.rotationRate.gamma)
+	circle.y = MIDDLE + event.acceleration.x * (INIT_SENS + sensFactor) + distanceFactor; // (-1 * event.rotationRate.gamma)
 
 	debugText.text = 'Accel: ' + Math.round(event.acceleration.x);
 	
