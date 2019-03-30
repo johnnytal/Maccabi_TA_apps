@@ -9,7 +9,7 @@ var shakerMain = function(game){
 	distanceFactor = 0;
 
 	INIT_SIZE = 0.82; // 0.82
-	INIT_SENS = 420; // 7.55
+	INIT_SENS = 770; // 7.55
 };
 
 shakerMain.prototype = {
@@ -37,13 +37,14 @@ shakerMain.prototype = {
         
 		XtraUIbuttons();
 
-        try{navigator.accelerometer.watchAcceleration(readAccel, onError, { frequency: 1});} catch(e){}
+       // try{navigator.accelerometer.watchAcceleration(readAccel, onError, { frequency: 1});} catch(e){}
+        try{window.addEventListener("devicemotion",readAccel, true);} catch(e){}
     }
 };
 
-function readAccel(acceleration){	
-	if (Math.abs(acceleration.x) > 1.5){
-    	circle.body.gravity.y = acceleration.x * (INIT_SENS + sensFactor); //MIDDLE +
+function readAccel(event){	
+	if (Math.abs(event.acceleration.x) > 1.5){
+    	circle.body.gravity.y = event.acceleration.x * (INIT_SENS + sensFactor); //MIDDLE +
     }
     else{
     	circle.body.gravity.y = 0;
