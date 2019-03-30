@@ -9,7 +9,7 @@ var shakerMain = function(game){
 	distanceFactor = 0;
 
 	INIT_SIZE = 100; // 0.82
-	INIT_SENS = 4.5; // 7.55
+	INIT_SENS = 5; // 7.55
 };
 
 shakerMain.prototype = {
@@ -27,7 +27,7 @@ shakerMain.prototype = {
 		circles.physicsBodyType = Phaser.Physics.ARCADE;
 		
 		circle = circles.create(0, 0, 'green');
-		circle.scale.set(0.95, 0.95);
+		circle.scale.set(0.83, 0.83);
 
         circle.x = WIDTH / 2 - circle.width / 2;
         MIDDLE = HEIGHT / 2 - circle.height / 2;
@@ -49,7 +49,7 @@ function readAccel(event){
 
 	debugText.text = 'Accel: ' + Math.round(event.accelerationIncludingGravity.x);
 	
-	if (!resetTouching && Math.abs(circle.y - MIDDLE) < 22){
+	if (!resetTouching && Math.abs(circle.y - MIDDLE) < 25){
 		resetTouching = true;
 	}
 	
