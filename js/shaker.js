@@ -36,15 +36,20 @@ shakerMain.prototype = {
         circle.body.collideWorldBounds = true;
         
 		XtraUIbuttons();
+		
+	    debugText = game.add.text(100, 30, "" , {font: '22px', fill: 'white'});
 
         try{window.addEventListener("devicemotion",readAccel, true);} catch(e){}
     }
 };
 
 function readAccel(event){	
-	circle.body.gravity.y = event.acceleration.x * (INIT_SENS + sensFactor); //MIDDLE +
-	circle.body.velocity.y = 0 + distanceFactor;
-
+	circle.body.gravity.y = roundIt(event.acceleration.x * (INIT_SENS + sensFactor) + event.rotationRate.beta); //MIDDLE +
+	
+	debugText.text = 'Gravity: ' + circle.body.gravity.y + 
+	'\nAccel: ' + roundIt(event.acceleration.x) + 
+	'\nBeta: ' + roundIt(event.rotationRate.beta);
+	
 	if (!resetTouching && Math.abs(circle.y - MIDDLE) < 22){
 		resetTouching = true;
 	}
