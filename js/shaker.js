@@ -22,12 +22,13 @@ shakerMain.prototype = {
     	bg.alpha = 0.6;
 
 		circle = game.add.image(0, 0, 'green');
+		circle.scale.set(0.9, 0.9);
         circle.x = WIDTH / 2 - circle.width / 2;
         circle.y = HEIGHT / 2 - circle.height / 2;
  
 		XtraUIbuttons();
 		
-	    debugText = game.add.text(100, 30, "" , {font: '23px', fill: 'white'});
+	    debugText = game.add.text(110, 30, "" , {font: '23px', fill: 'white'});
 		
 		try{window.addEventListener('deviceorientation', readAccel);}catch(e){}
     }
@@ -39,18 +40,16 @@ function readAccel(event){
 	debugText.text = 'Angle: ' + angle;
 	
 	if (!resetTouching && angle > ((INIT_BACK + backAngle) + 1) && angle < ((INIT_FRONT + frontAngle) - 1)){
-		if (!front.isPlaying && !back.isPlaying){
 			resetTouching = true;
-		}
 	}
 	
 	if (game.state.getCurrentState().key == 'Shaker'){
 		if (resetTouching){
-			if (angle > (INIT_FRONT + frontAngle)){
+			if (angle > (INIT_FRONT + frontAngle) && !front.isPlaying){
 				front.play();
 				flash(FRONT_COLOR);	
 			}
-			else if (angle < (INIT_BACK + backAngle)){
+			else if (angle < (INIT_BACK + backAngle) && !back.isPlaying){
 				back.play();
 				flash(BACK_COLOR);
 			}
@@ -127,9 +126,9 @@ function XtraUIbuttons(){
     	setTimeout(function(){minusD.tint = 0xffffff;},100);
     }, this);
 	
-    backText = game.add.text(530, 30, "BACK: " + roundIt(INIT_BACK + backAngle),
+    backText = game.add.text(545, 40, "BACK: " + roundIt(INIT_BACK + backAngle),
     {font: '23px', fill: 'white'});
     
-    frontText = game.add.text(530, 230, "FRONT: " + roundIt(INIT_FRONT + frontAngle),
+    frontText = game.add.text(545, 240, "FRONT: " + roundIt(INIT_FRONT + frontAngle),
     {font: '23px', fill: 'white'});
 }
