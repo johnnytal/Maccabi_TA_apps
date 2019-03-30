@@ -9,7 +9,7 @@ var shakerMain = function(game){
 	distanceFactor = 0;
 
 	INIT_SIZE = 100; // 0.82
-	INIT_SENS = 6; // 7.55
+	INIT_SENS = 30; // 7.55
 };
 
 shakerMain.prototype = {
@@ -38,8 +38,9 @@ shakerMain.prototype = {
 		XtraUIbuttons();
 		
 	    debugText = game.add.text(100, 30, "" , {font: '22px', fill: 'white'});
-
-        try{window.addEventListener("devicemotion",readAccel, true);} catch(e){}
+		
+		try{window.addEventListener('deviceorientation', readAccel);}catch(e){}
+       // try{window.addEventListener("devicemotion",readAccel, true);} catch(e){}
     }
 };
 
@@ -47,19 +48,19 @@ function readAccel(event){
 
 	//circle.y = MIDDLE + event.accelerationIncludingGravity.x * (INIT_SENS + sensFactor) + distanceFactor; // (-1 * event.rotationRate.gamma)
 
-	debugText.text = 'Accel: ' + Math.round(event.accelerationIncludingGravity.x);
+	debugText.text = 'Gamma: ' + Math.round(event.gamma);
 	
-	if (!resetTouching && event.accelerationIncludingGravity.x > -2.5 && event.accelerationIncludingGravity.x < 2.5){
+	if (!resetTouching && event.gamma > -2.5 && event.gamma < 2.5){
 		resetTouching = true;
 	}
 	
 	if (game.state.getCurrentState().key == 'Shaker'){
 		if (resetTouching){
-			if (event.accelerationIncludingGravity.x < (-INIT_SENS - sensFactor) && !front.isPlaying && !back.isPlaying){
+			if (event.gamma < (-INIT_SENS - sensFactor) && !front.isPlaying && !back.isPlaying){
 				front.play();
 				flash(FRONT_COLOR);	
 			}
-			else if (event.accelerationIncludingGravity.x > ((INIT_SENS + sensFactor) / 1.5)  && !front.isPlaying && !back.isPlaying){
+			else if (event.gamma > ((INIT_SENS + sensFactor) / 1.5)  && !front.isPlaying && !back.isPlaying){
 				back.play();
 				flash(BACK_COLOR);
 			}
