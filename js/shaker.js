@@ -46,10 +46,8 @@ shakerMain.prototype = {
 };
 
 function readAccel(acceleration){	
-    circle.y = MIDDLE + acceleration.x * (INIT_SENS + sensFactor);
-   
     if (Math.abs(acceleration.x) > 1.5){
-    	circle.y = acceleration.x * (INIT_SENS + sensFactor);
+    	circle.y = MIDDLE + acceleration.x * (INIT_SENS + sensFactor);
     }
 
 	/*if (circle.y > -1 && circle.y < HEIGHT - 1){
