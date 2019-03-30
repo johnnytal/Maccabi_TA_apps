@@ -2,10 +2,12 @@ var shakerMain = function(game){
 	FRONT_COLOR = '#c1ad65';
 	BACK_COLOR = '#656d7c';
 
-	resetTouching = true;;
+	resetTouching = true;
 
 	frontAngle = 0;
 	backAngle = 0;
+	
+	lastPlayed = null;
 
 	INIT_FRONT = 22;
 	INIT_BACK = -3;
@@ -39,21 +41,23 @@ function readAccel(event){
 	
 	debugText.text = 'Angle: ' + angle;
 	
-	if (!resetTouching && angle > ((INIT_BACK + backAngle) + 1) && angle < ((INIT_FRONT + frontAngle) - 1)){
+	if (!resetTouching && angle > ((INIT_BACK + backAngle) + 0.75) && angle < ((INIT_FRONT + frontAngle) - 0.75)){
 			resetTouching = true;
 	}
 	
 	if (game.state.getCurrentState().key == 'Shaker'){
-		if (resetTouching){
-			if (angle > (INIT_FRONT + frontAngle) && !front.isPlaying){
-				front.play();
-				flash(FRONT_COLOR);	
-			}
-			else if (angle < (INIT_BACK + backAngle) && !back.isPlaying){
-				back.play();
-				flash(BACK_COLOR);
-			}
+
+		if (angle > (INIT_FRONT + frontAngle) && (lastPlayed == 'back' || resetTouching)){
+			front.play();
+			flash(FRONT_COLOR);	
+			lastPlayed = 'front';
 		}
+		else if (angle < (INIT_BACK + backAngle) && (lastPlayed == 'front' || resetTouching)){
+			back.play();
+			flash(BACK_COLOR);
+			lastPlayed = 'back';
+		}
+		
 	}
 }
 
