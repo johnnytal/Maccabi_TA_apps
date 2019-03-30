@@ -43,7 +43,7 @@ shakerMain.prototype = {
 
 function readAccel(event){	
 	circle.body.gravity.y = event.acceleration.x * (INIT_SENS + sensFactor); //MIDDLE +
-	circle.body.velocity.y = 100 + distanceFactor;
+	circle.body.velocity.y = 0 + distanceFactor;
 
 	if (!resetTouching && Math.abs(circle.y - MIDDLE) < 22){
 		resetTouching = true;
@@ -117,7 +117,7 @@ function XtraUIbuttons(){
     plusD.alpha = 0.85;
     plusD.inputEnabled = true;
     plusD.events.onInputDown.add(function(){
-    	distanceFactor += 0.05;
+    	distanceFactor += 10;
     	distanceText.text = "Size\nfactor: " + roundIt(distanceFactor);
     	plusD.tint = 0xf04030;
     	//circle.scale.set(INIT_SIZE + distanceFactor);
@@ -129,7 +129,7 @@ function XtraUIbuttons(){
     minusD.alpha = 0.85;
     minusD.inputEnabled = true;
     minusD.events.onInputDown.add(function(){
-    	distanceFactor -= 0.05;
+    	distanceFactor -= 10;
     	distanceText.text = "Size\nfactor: " + roundIt(distanceFactor);
     	minusD.tint = 0xf04030;
     	//circle.scale.set(INIT_SIZE + distanceFactor);
