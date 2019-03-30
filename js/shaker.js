@@ -9,7 +9,7 @@ var shakerMain = function(game){
 	distanceFactor = 0;
 
 	INIT_SIZE = 100; // 0.82
-	INIT_SENS = 5; // 7.55
+	INIT_SENS = 6; // 7.55
 };
 
 shakerMain.prototype = {
@@ -54,11 +54,11 @@ function readAccel(event){
 	}
 	
 	if (game.state.getCurrentState().key == 'Shaker'){
-		if (event.accelerationIncludingGravity.x < (-12 - sensFactor) && !front.isPlaying){
+		if (event.accelerationIncludingGravity.x < (-INIT_SENS - sensFactor) && !front.isPlaying && !back.isPlaying){
 			front.play();
 			flash(FRONT_COLOR);	
 		}
-		else if (event.accelerationIncludingGravity.x > (12 + sensFactor) && !back.isPlaying){
+		else if (event.accelerationIncludingGravity.x > ((INIT_SENS / 1.5) + sensFactor)  && !front.isPlaying && !back.isPlaying){
 			back.play();
 			flash(BACK_COLOR);
 		}
@@ -107,7 +107,7 @@ function XtraUIbuttons(){
     plus.alpha = 0.85;
     plus.inputEnabled = true;
     plus.events.onInputDown.add(function(){
-    	sensFactor += 0.01;
+    	sensFactor += 0.1;
     	sensText.text = "Sensitivity\nfactor: " + roundIt(sensFactor);
     	plus.tint = 0xf04030;
     	setTimeout(function(){plus.tint = 0xffffff;},100);
@@ -118,7 +118,7 @@ function XtraUIbuttons(){
     minus.alpha = 0.85;
     minus.inputEnabled = true;
     minus.events.onInputDown.add(function(){
-    	sensFactor -= 0.01;
+    	sensFactor -= 0.1;
     	sensText.text = "Sensitivity\nfactor: " + roundIt(sensFactor);
     	minus.tint = 0xf04030;
     	setTimeout(function(){minus.tint = 0xffffff;},100);
