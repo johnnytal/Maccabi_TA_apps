@@ -38,6 +38,7 @@
 		<plugin name="cordova-plugin-android-volume" spec="*"/>
 		<plugin name="cordova-plugin-vibration" spec="*"/>
 		<plugin name="cordova-plugin-device-motion" spec="*"/>
+		<plugin name="cordova-plugin-nativeaudio" spec="*"/>
 
 		<icon src="512x512.png" />
 		
