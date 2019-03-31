@@ -47,8 +47,8 @@ preloader.prototype = {
         game.load.audio("F2", "assets/HO_stac_mf2/HO-L_oV_nA_sus_mf_F2.mp3");
         game.load.audio("G2", "assets/HO_stac_mf2/HO-L_oV_nA_sus_mf_G2.mp3");
         
-        nativeAudio.preloadSimple('front', 'assets/audio/front.mp3');
-        nativeAudio.preloadSimple('back', 'assets/audio/back.mp3');
+        window.plugins.NativeAudio.preloadSimple('front', 'assets/audio/front.mp3', function(msg){}, function(msg){});
+        window.plugins.NativeAudio.preloadSimple('back', 'assets/audio/back.mp3', function(msg){}, function(msg){});
     },
     
     create: function(){		        

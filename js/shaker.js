@@ -56,13 +56,13 @@ function readAngle(event){
 
 		if (angle > (INIT_FRONT + frontAngle) && (lastPlayed == 'back' || resetTouching)){
 			//front.volume = volume;
-			nativeAudio.play('front');
+			window.plugins.NativeAudio.play('front');
 			flash(FRONT_COLOR);	
 			lastPlayed = 'front';
 		}
 		else if (angle < (INIT_BACK + backAngle) && (lastPlayed == 'front' || resetTouching)){
 			//back.volume = volume;
-			nativeAudio.play('back');
+			window.plugins.NativeAudio.play('back');
 			flash(BACK_COLOR);
 			lastPlayed = 'back';
 		}	
