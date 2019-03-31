@@ -34,8 +34,8 @@ shakerMain.prototype = {
 		
 	    debugText = game.add.text(110, 30, "" , {font: '24px', fill: 'white'});
 	    
-	    front = new Media('assets/audio/front.mp3');
-	    back = new Media('assets/audio/back.mp3');
+	    //front = new Media('assets/audio/front.mp3');
+	   // back = new Media('assets/audio/back.mp3');
 		
 		try{window.addEventListener('deviceorientation', readAngle);}catch(e){}
 		//try{window.addEventListener("devicemotion", readAccel, true);}catch(e){}

@@ -35,8 +35,8 @@ preloader.prototype = {
         
         game.load.audio("choose", "assets/audio/choose.mp3");
         
-        //game.load.audio("front", "assets/audio/front.mp3");
-        //game.load.audio("back", "assets/audio/back.mp3");
+        game.load.audio("front", "assets/audio/front.mp3");
+        game.load.audio("back", "assets/audio/back.mp3");
 
         game.load.audio("B1", "assets/HO_stac_mf2/HO-L_oV_nA_sus_mf_B1.mp3");
         game.load.audio("C_2", "assets/HO_stac_mf2/HO-L_oV_nA_sus_mf_C_2.mp3");
