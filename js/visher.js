@@ -24,7 +24,6 @@ visherMain.prototype = {
         wiper.x = (WIDTH / 2 - wiper.width / 2)  + 500;
         
         wiper.anchor.set(1, .5);
-        
         wiper.body.collideWorldBounds = true;
     	
         angleText = game.add.text(600, 50, "Vish it!", {font: '32px', fill: 'white'});
@@ -33,7 +32,6 @@ visherMain.prototype = {
     },
     
     update: function(){
-
     	if (game.state.getCurrentState().key == 'Visher'){
 	    	if (!resetVisher && wiper.angle < 20 && wiper.angle > - 20){
 	    		resetVisher = true;
@@ -72,3 +70,5 @@ function flashVisher(_image){
 		window.plugins.flashlight.switchOff();
 	}, 100);	
 }
+
+function onError(e){}
