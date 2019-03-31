@@ -43,6 +43,17 @@ function readTrombAccel(event){
 		}
 		prev_reading = accelY;
 	}
+	
+	if (sfx1.isPlaying){
+		setTimeout(function(){
+			sfx1.stop();
+		}, 1000);
+	}
+	if (sfx8.isPlaying){
+		setTimeout(function(){
+			sfx8.stop();
+		}, 1000);
+	}
 }
 
 function loadHorn(){
