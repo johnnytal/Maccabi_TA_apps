@@ -18,7 +18,7 @@ var shakerMain = function(game){
 shakerMain.prototype = {
     create: function(){
     	game.stage.backgroundColor = '#002255';
-    	
+
     	frontAngle = 0;
     	backAngle = 0;
 
@@ -55,14 +55,16 @@ function readAngle(event){
 	if (game.state.getCurrentState().key == 'Shaker'){
 
 		if (angle > (INIT_FRONT + frontAngle) && (lastPlayed == 'back' || resetTouching)){
-			front.volume = volume;
-			front.play();
+			//front.volume = volume;
+			//front.play();
+			document.getElementById('front').play();
 			flash(FRONT_COLOR);	
 			lastPlayed = 'front';
 		}
 		else if (angle < (INIT_BACK + backAngle) && (lastPlayed == 'front' || resetTouching)){
-			back.volume = volume;
-			back.play();
+			//back.volume = volume;
+			//back.play();
+			document.getElementById('back').play();
 			flash(BACK_COLOR);
 			lastPlayed = 'back';
 		}	

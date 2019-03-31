@@ -38,10 +38,7 @@ function readTrombAccel(event){
 		if (prev_reading != accelY){
 			if (accelY < 8){
 				notesToPlay[accelY].fadeIn(INIT_FADE + fadeFactor);
-				
-				if (accelY > -1){
-					try{ notesToPlay[prev_reading].fadeOut(INIT_FADE + fadeFactor); }catch(e){}
-				}
+				try{ notesToPlay[prev_reading].fadeOut(INIT_FADE + fadeFactor); }catch(e){}
 			}
 		}
 		prev_reading = accelY;
