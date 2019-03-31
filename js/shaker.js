@@ -33,9 +33,12 @@ shakerMain.prototype = {
 		XtraUIbuttons();
 		
 	    debugText = game.add.text(110, 30, "" , {font: '24px', fill: 'white'});
+	    
+	    front = new Media('assets/audio/front.mp3');
+	    back = new Media('assets/audio/back.mp3');
 		
 		try{window.addEventListener('deviceorientation', readAngle);}catch(e){}
-		try{window.addEventListener("devicemotion", readAccel, true);}catch(e){}
+		//try{window.addEventListener("devicemotion", readAccel, true);}catch(e){}
     }
 };
 
@@ -56,13 +59,13 @@ function readAngle(event){
 
 		if (angle > (INIT_FRONT + frontAngle) && (lastPlayed == 'back' || resetTouching)){
 			//front.volume = volume;
-			window.plugins.NativeAudio.play('front');
+			front.play();
 			flash(FRONT_COLOR);	
 			lastPlayed = 'front';
 		}
 		else if (angle < (INIT_BACK + backAngle) && (lastPlayed == 'front' || resetTouching)){
 			//back.volume = volume;
-			window.plugins.NativeAudio.play('back');
+			back.play();
 			flash(BACK_COLOR);
 			lastPlayed = 'back';
 		}	
