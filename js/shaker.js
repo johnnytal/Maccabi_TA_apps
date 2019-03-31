@@ -40,7 +40,7 @@ shakerMain.prototype = {
 };
 
 function readAccel(event){
-	volume = Math.abs(event.accelerationIncludingGravity.x) /  22;
+	volume = Math.abs(event.accelerationIncludingGravity.x) /  17;
 }
 
 function readAngle(event){	

@@ -24,12 +24,10 @@ trombMain.prototype = {
        	try{window.addEventListener('deviceorientation', readTrombAccel);}catch(e){}
        	
        	TrombUIbuttons();
-
-		//try{navigator.accelerometer.watchAcceleration(readTrombAccel, onError, { frequency: 250 });} catch(e){}	
     }
 };
 
-function readTrombAccel(acceleration){
+function readTrombAccel(event){
 	if (game.state.getCurrentState().key == "Trombone"){
 		
 		var beta = event.beta;  // -180,180 Y
@@ -46,35 +44,6 @@ function readTrombAccel(acceleration){
 				}
 			}
 		}
-		
-		/*if (accelY < prev_reading){
-			try{
-				clearTimeout(muteTimer);
-				muteTimer = null;
-			}catch(e){}
-			
-			
-	        if (trombSound.paused){
-	           trombSound.resume();    
-	        }
-	        else if (!trombSound.isPlaying && !trombSound.paused){
-	            trombSound.play();
-	        }
-	
-			game.stage.backgroundColor = '#0245f0';
-			trombImg.tint = 0x00ffff;
-		}
-		else{
-			if (!trombSound.paused){
-				muteTimer = setTimeout(function(){
-					trombSound.pause();
-				}, 150);
-				
-				game.stage.backgroundColor = '#0f5420';
-				trombImg.tint = 0xffffff;
-			}
-		}*/
-		
 		prev_reading = accelY;
 	}
 }
